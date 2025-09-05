@@ -132,6 +132,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>There are 1,307 females, 1,342 infants, and 1,528 males.</p>
 </section>
+<section id="problem-1c" class="level2">
+<h2 class="anchored" data-anchor-id="problem-1c">Problem 1(c)</h2>
+<section id="problem-1c1" class="level3">
+<h3 class="anchored" data-anchor-id="problem-1c1">Problem 1(c)(1)</h3>
+<p>I found the R function for correlation from <a href="https://statsandr.com/blog/correlation-coefficient-and-correlation-test-in-r/">this blog post</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># correlation between different weights and rings</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Whole Weight: "</span>, <span class="fu">cor</span>(df<span class="sc">$</span>whole_weight, df<span class="sc">$</span>rings)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Whole Weight: 0.540389676923904"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Shucked Weight: "</span>, <span class="fu">cor</span>(df<span class="sc">$</span>shucked_weight, df<span class="sc">$</span>rings)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Shucked Weight: 0.420883657945217"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Viscera Weight: "</span>, <span class="fu">cor</span>(df<span class="sc">$</span>viscera_weight, df<span class="sc">$</span>rings)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Viscera Weight: 0.503819248759774"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Shell Weight: "</span>, <span class="fu">cor</span>(df<span class="sc">$</span>shell_weight, df<span class="sc">$</span>rings)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Shell Weight: 0.627574044510329"</code></pre>
+</div>
+</div>
+<p>Shell weight is most correlated with rings.</p>
+</section>
+<section id="problem-1c2" class="level3">
+<h3 class="anchored" data-anchor-id="problem-1c2">Problem 1(c)(2)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split dataframes by sex</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>males <span class="ot">&lt;-</span> df[df<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"M"</span>,]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>females <span class="ot">&lt;-</span> df[df<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"F"</span>,]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>infants <span class="ot">&lt;-</span> df[df<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"I"</span>,]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># output correlations</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Males: "</span>, <span class="fu">cor</span>(males<span class="sc">$</span>shell_weight, males<span class="sc">$</span>rings)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Males: 0.510996723795907"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Females: "</span>, <span class="fu">cor</span>(females<span class="sc">$</span>shell_weight, females<span class="sc">$</span>rings)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Females: 0.405907019837356"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Infants: "</span>, <span class="fu">cor</span>(infants<span class="sc">$</span>shell_weight, infants<span class="sc">$</span>rings)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Infants: 0.725435674284465"</code></pre>
+</div>
+</div>
+<p>For infants, shell weight was most correlated with rings.</p>
+</section>
+<section id="problem-1c3" class="level3">
+<h3 class="anchored" data-anchor-id="problem-1c3">Problem 1(c)(3)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the record where the number of rings is the highest number of rings</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>rings <span class="sc">==</span> <span class="fu">max</span>(df<span class="sc">$</span>rings),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    sex length diameter height whole_weight shucked_weight viscera_weight
+481   F    0.7    0.585  0.185       1.8075         0.7055         0.3215
+    shell_weight rings
+481        0.475    29</code></pre>
+</div>
+</div>
+<p>For the abalone with the most rings, the whole weight was 1.8075g, the shucked weight was 0.7055g, the viscera weight was 0.3215g, and the shell weight was 0.475g.</p>
+</section>
+<section id="problem-1c4" class="level3">
+<h3 class="anchored" data-anchor-id="problem-1c4">Problem 1(c)(4)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>numerator <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df[df<span class="sc">$</span>viscera_weight <span class="sc">&gt;</span> df<span class="sc">$</span>shell_weight,]) </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>denominator <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="dv">100</span><span class="sc">*</span>numerator<span class="sc">/</span>denominator)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.511851</code></pre>
+</div>
+</div>
+<p>The percentage of abalones for which the viscera weight was greater than the shell weight was 6.51%.</p>
+</section>
+</section>
 </section>
 
 </main>

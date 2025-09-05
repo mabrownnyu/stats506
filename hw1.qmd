@@ -31,3 +31,61 @@ table(df$sex)
 ```
 
 There are 1,307 females, 1,342 infants, and 1,528 males.
+
+## Problem 1(c)
+
+### Problem 1(c)(1)
+
+I found the R function for correlation from [this blog post](https://statsandr.com/blog/correlation-coefficient-and-correlation-test-in-r/).
+
+```{r}
+
+# correlation between different weights and rings
+print(paste0("Whole Weight: ", cor(df$whole_weight, df$rings)))
+
+print(paste0("Shucked Weight: ", cor(df$shucked_weight, df$rings)))
+
+print(paste0("Viscera Weight: ", cor(df$viscera_weight, df$rings)))
+
+print(paste0("Shell Weight: ", cor(df$shell_weight, df$rings)))
+
+```
+
+Shell weight is most correlated with rings.
+
+### Problem 1(c)(2)
+
+```{r}
+# split dataframes by sex
+males <- df[df$sex == "M",]
+females <- df[df$sex == "F",]
+infants <- df[df$sex == "I",]
+
+# output correlations
+print(paste0("Males: ", cor(males$shell_weight, males$rings)))
+print(paste0("Females: ", cor(females$shell_weight, females$rings)))
+print(paste0("Infants: ", cor(infants$shell_weight, infants$rings)))
+
+```
+
+For infants, shell weight was most correlated with rings.
+
+### Problem 1(c)(3)
+
+```{r}
+# get the record where the number of rings is the highest number of rings
+df[df$rings == max(df$rings),]
+```
+
+For the abalone with the most rings, the whole weight was 1.8075g, the shucked weight was 0.7055g, the viscera weight was 0.3215g, and the shell weight was 0.475g.
+
+### Problem 1(c)(4)
+
+```{r}
+numerator <- nrow(df[df$viscera_weight > df$shell_weight,]) 
+denominator <- nrow(df)
+
+print(100*numerator/denominator)
+```
+
+The percentage of abalones for which the viscera weight was greater than the shell weight was 6.51%.
