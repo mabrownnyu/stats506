@@ -12,7 +12,8 @@ author: "Megan Brown"
 ```{r}
 
 # column names from abalone.names
-columns <- c("sex", "length", "diameter", "height", "whole_weight", "shucked_weight", "viscera_weight", "shell_weight", "rings")
+columns <- c("sex", "length", "diameter", "height", "whole_weight",
+             "shucked_weight", "viscera_weight", "shell_weight", "rings")
 
 # data from abalone.data
 df <- read.csv('datasets/abalone/abalone.data', header=FALSE)
@@ -25,5 +26,8 @@ names(df) <- columns
 
 ```{r}
 
-# 
+# count the number of records by sex 
+table(df$sex)
 ```
+
+There are 1,307 females, 1,342 infants, and 1,528 males.
