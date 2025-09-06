@@ -283,3 +283,39 @@ nextCollatz(5)
 ```{r}
 nextCollatz(16)
 ```
+
+## Problem 3(b)
+
+```{r}
+collatzSequence <- function(num){
+  
+  # return if not a positive integer
+  if (num <= 0 | num %% 1 != 0){
+    print("Must input positive integer.")
+    return()
+  }
+  
+  # initialize sequnce with input number
+  sequence <- c(num)
+
+  # while we have not reached 1, get the next Collatz number
+  # and add it to the sequence 
+  while (num != 1){
+    num <- nextCollatz(num)
+    sequence <- append(sequence, num)
+  }
+  
+  # return the sequence 
+  output <- list("sequence"=sequence, 
+                 "length"=length(sequence))
+  return(output)
+}
+```
+
+```{r}
+collatzSequence(5)
+```
+
+```{r}
+collatzSequence(19)
+```
