@@ -147,3 +147,14 @@ names(df) <- c("id", "age", "n_household", "state", "currency",
                "misc_spending", "n_dineout", "alcohol", "food_assistance"
                )
 ```
+
+## Problem 2(c)
+
+```{r}
+print(paste0("Number of observations: ", nrow(df)))
+
+df <- df[df$currency == "USD", ]
+
+print(paste0("Number of observations (only USD): ", nrow(df)))
+
+```
