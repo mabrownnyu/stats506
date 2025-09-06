@@ -221,3 +221,14 @@ I first converted food spending to numeric values. Then, I filtered out records 
 ```{r}
 summary(df$n_dineout)
 ```
+
+```{r}
+# filter out records where # of dineouts is NA
+df <- df[!is.na(df$n_dineout), ]
+
+# filter out records where people report dining more 
+# than 21 times per week (3 times per day)
+df <- df[df$n_dineout <= 21, ]
+```
+
+I filtered out records where the number of dineouts was NA and where individuals reported dining out more than 21 times (more than three meals per day).
