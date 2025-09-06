@@ -240,3 +240,46 @@ nrow(df)
 ```
 
 The total number of remaining observations is 127.
+
+# Problem 3
+
+## Problem 3(a)
+
+I used [this stackoverflow post](https://stackoverflow.com/questions/3476782/check-if-the-number-is-integer) to figure out how to detect integers in R when passing a datatype double that is an integer.
+
+```{r}
+#' nextCollatz
+#'
+#' @param num A positive integer
+#'
+#' @returns The next value in the Collatz sequence
+nextCollatz <- function(num){
+  if (num <= 0 | num %% 1 != 0){
+    print("Must input positive integer.")
+    return()
+  }
+  
+  num <- as.integer(num)
+  # if num is even, return n/2 
+  if (num %% 2 == 0){
+    num = num / 2
+    
+  }
+  # if num is odd, return 3n + 1
+  else{
+    num <- 3 * num + 1
+  }
+  
+  # convert value to integer and return 
+  num <- as.integer(num)
+  return(num)
+}
+```
+
+```{r}
+nextCollatz(5)
+```
+
+```{r}
+nextCollatz(16)
+```
