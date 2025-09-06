@@ -319,3 +319,43 @@ collatzSequence(5)
 ```{r}
 collatzSequence(19)
 ```
+
+## Problem 3(c)
+
+```{r}
+
+# set init values
+min_len = 1e9
+min_val = 0
+
+max_len = 0
+max_val = 0
+
+for (val in 100:500){
+  
+  # get sequence and length for value
+  seq_len <- collatzSequence(val)
+
+  # if the sequence length is less than the min length,
+  # save the sequence length and the index
+  if (seq_len$length < min_len){
+    min_len <- seq_len$length 
+    min_val <- val
+  }
+  
+  # if the sequence length is greater than the maximum length,
+  # save the sequence length and the index 
+  if (seq_len$length > max_len){
+    max_len <- seq_len$length 
+    max_val <- val 
+  }
+}
+```
+
+```{r}
+print(paste0("Shortest sequence start: ", min_val))
+print(paste0("Shortest sequence length: ", min_len))
+
+print(paste0("Longest sequence start: ", max_val))
+print(paste0("Longest sequence length: ", max_len))
+```
