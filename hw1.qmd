@@ -232,3 +232,11 @@ df <- df[df$n_dineout <= 21, ]
 ```
 
 I filtered out records where the number of dineouts was NA and where individuals reported dining out more than 21 times (more than three meals per day).
+
+## Problem 2(h)
+
+```{r}
+nrow(df)
+```
+
+The total number of remaining observations is 127.
