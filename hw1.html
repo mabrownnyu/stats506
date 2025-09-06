@@ -351,8 +351,29 @@ mean of x mean of y
 </div>
 <p>I removed all records where state is not reported or where the state is “XX”.</p>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<section id="problem-2f" class="level2">
+<h2 class="anchored" data-anchor-id="problem-2f">Problem 2(f)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert values to numeric</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>food_spending <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>food_spending)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>grocery_spending <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>grocery_spending)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>dining_spending <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>dining_spending)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>misc_spending <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>misc_spending)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out NAs</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>food_spending) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>grocery_spending)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>         <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>dining_spending <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>misc_spending)), ]</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out food expenditures less than 0</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>food_spending <span class="sc">&gt;=</span> <span class="dv">0</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>         <span class="sc">&amp;</span> df<span class="sc">$</span>grocery_spending <span class="sc">&gt;=</span> <span class="dv">0</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>         <span class="sc">&amp;</span> df<span class="sc">$</span>dining_spending <span class="sc">&gt;=</span> <span class="dv">0</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>         <span class="sc">&amp;</span> df<span class="sc">$</span>misc_spending <span class="sc">&gt;=</span> <span class="dv">0</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I first converted food spending to numeric values. Then, I filtered out records where a type of food spending was not reported. Lastly, I filtered out records where the level of food spending was a negative amount.</p>
 </section>
 </section>
 

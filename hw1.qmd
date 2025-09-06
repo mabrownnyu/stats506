@@ -184,4 +184,25 @@ df <- df[!is.na(df$state) & df$state != "XX", ]
 
 I removed all records where state is not reported or where the state is "XX".
 
-## 
+## Problem 2(f)
+
+```{r}
+
+# convert values to numeric
+df$food_spending <- as.numeric(df$food_spending)
+df$grocery_spending <- as.numeric(df$grocery_spending)
+df$dining_spending <- as.numeric(df$dining_spending)
+df$misc_spending <- as.numeric(df$misc_spending)
+
+# filter out NAs
+df <- df[!is.na(df$food_spending) & !is.na(df$grocery_spending)
+         & !is.na(df$dining_spending & !is.na(df$misc_spending)), ]
+
+# filter out food expenditures less than 0
+df <- df[df$food_spending >= 0
+         & df$grocery_spending >= 0
+         & df$dining_spending >= 0
+         & df$misc_spending >= 0, ]
+```
+
+I first converted food spending to numeric values. Then, I filtered out records where a type of food spending was not reported. Lastly, I filtered out records where the level of food spending was a negative amount.
