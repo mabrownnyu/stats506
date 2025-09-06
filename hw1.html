@@ -103,8 +103,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="problem-1" class="level1">
-<h1>Problem 1</h1>
+<section id="problem-1---abalone-data" class="level1">
+<h1>Problem 1 - Abalone Data</h1>
 <section id="problem-1a" class="level2">
 <h2 class="anchored" data-anchor-id="problem-1a">Problem 1(a)</h2>
 <div class="cell">
@@ -234,6 +234,64 @@ shell_weight   0.5109967 0.40590702 0.7254357</code></pre>
 </div>
 </div>
 </section>
+<section id="problem-1e" class="level2">
+<h2 class="anchored" data-anchor-id="problem-1e">Problem 1(e)</h2>
+<p>First, testing the difference between males and females.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(males<span class="sc">$</span>rings, females<span class="sc">$</span>rings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  males$rings and females$rings
+t = -3.6657, df = 2742.4, p-value = 0.0002514
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.6505082 -0.1971045
+sample estimates:
+mean of x mean of y 
+  10.7055   11.1293 </code></pre>
+</div>
+</div>
+<p>Then, testing the difference between males and infants.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(males<span class="sc">$</span>rings, infants<span class="sc">$</span>rings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  males$rings and infants$rings
+t = 27.221, df = 2859, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 2.612263 3.017808
+sample estimates:
+mean of x mean of y 
+10.705497  7.890462 </code></pre>
+</div>
+</div>
+<p>Lastly, testing the difference between females and infants.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(females<span class="sc">$</span>rings, infants<span class="sc">$</span>rings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  females$rings and infants$rings
+t = 29.477, df = 2508.9, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 3.023380 3.454304
+sample estimates:
+mean of x mean of y 
+11.129304  7.890462 </code></pre>
+</div>
+</div>
+<p>Each group has a statistically significant difference in the number of rings among the group. Particularly, infants had an average of 8 rings, and males and females had an average of 10.7 and 11.1 rings, respectively. While the magnitude of the difference between the number of rings between males and females is smaller, the different is statistically significant.</p>
+</section>
+</section>
+<section id="problem-2---food-expenditure-data" class="level1">
+<h1>Problem 2 - Food Expenditure Data</h1>
 </section>
 
 </main>

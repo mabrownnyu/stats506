@@ -5,7 +5,7 @@ editor: visual
 author: "Megan Brown"
 ---
 
-# Problem 1
+# Problem 1 - Abalone Data
 
 ## Problem 1(a)
 
@@ -108,3 +108,27 @@ names(correlations) <- c("M (rings)", "F (rings)", "I (rings)")
 
 correlations
 ```
+
+## Problem 1(e)
+
+First, testing the difference between males and females.
+
+```{r}
+t.test(males$rings, females$rings)
+```
+
+Then, testing the difference between males and infants.
+
+```{r}
+t.test(males$rings, infants$rings)
+```
+
+Lastly, testing the difference between females and infants.
+
+```{r}
+t.test(females$rings, infants$rings)
+```
+
+Each group has a statistically significant difference in the number of rings among the group. Particularly, infants had an average of 8 rings, and males and females had an average of 10.7 and 11.1 rings, respectively. While the magnitude of the difference between the number of rings between males and females is smaller, the different is statistically significant.
+
+# Problem 2 - Food Expenditure Data
