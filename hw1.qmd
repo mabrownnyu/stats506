@@ -82,9 +82,13 @@ For the abalone with the most rings, the whole weight was 1.8075g, the shucked w
 ### Problem 1(c)(4)
 
 ```{r}
+# calculate number of abalones with viscera weight > shell weight
 numerator <- nrow(df[df$viscera_weight > df$shell_weight,]) 
+
+# get total number of abalones in data
 denominator <- nrow(df)
 
+# print percentage
 print(100*numerator/denominator)
 ```
 
@@ -94,7 +98,7 @@ The percentage of abalones for which the viscera weight was greater than the she
 
 ```{r}
 
-
+# calculate correlations
 male_correlations <- cor(males[,c("whole_weight", "shucked_weight",
                                   "viscera_weight", "shell_weight")], males$rings)
 female_correlations <- cor(females[,c("whole_weight", "shucked_weight", 
@@ -102,6 +106,7 @@ female_correlations <- cor(females[,c("whole_weight", "shucked_weight",
 infant_correlations <- cor(infants[,c("whole_weight", "shucked_weight", 
                                       "viscera_weight", "shell_weight")], infants$rings)
 
+# create dataframe from correlations
 correlations <- data.frame(cbind(male_correlations, female_correlations,
                                  infant_correlations))
 names(correlations) <- c("M (rings)", "F (rings)", "I (rings)")
@@ -136,12 +141,14 @@ Each group has a statistically significant difference in the number of rings amo
 ## Problem 2(a)
 
 ```{r}
+# read CSV of food expenditures
 df <- read.csv("datasets/food_expenditure.csv")
 ```
 
 ## Problem 2(b)
 
 ```{r}
+# rename columns to be more legible
 names(df) <- c("id", "age", "n_household", "state", "currency", 
                "food_spending", "grocery_spending", "dining_spending",
                "misc_spending", "n_dineout", "alcohol", "food_assistance"
@@ -151,10 +158,13 @@ names(df) <- c("id", "age", "n_household", "state", "currency",
 ## Problem 2(c)
 
 ```{r}
+# print # observations
 print(paste0("Number of observations: ", nrow(df)))
 
+# filter to only USD
 df <- df[df$currency == "USD", ]
 
+# print remaining # of observations
 print(paste0("Number of observations (only USD): ", nrow(df)))
 
 ```
@@ -185,6 +195,7 @@ summary(df$state)
 ```
 
 ```{r}
+# filter out NA states, XX states, and empty string states
 df <- df[!is.na(df$state) & df$state != "XX" & df$state != "", ]
 ```
 
@@ -287,6 +298,13 @@ nextCollatz(16)
 ## Problem 3(b)
 
 ```{r}
+#' collatzSequence
+#'
+#' @param num a positive integer 
+#'
+#' @returns a list containing `sequence` and `length`, `sequence` 
+#' is the full Collatz Sequence for input `num`, and `length` is 
+#' the length of the sequence
 collatzSequence <- function(num){
   
   # return if not a positive integer
