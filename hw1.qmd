@@ -132,3 +132,9 @@ t.test(females$rings, infants$rings)
 Each group has a statistically significant difference in the number of rings among the group. Particularly, infants had an average of 8 rings, and males and females had an average of 10.7 and 11.1 rings, respectively. While the magnitude of the difference between the number of rings between males and females is smaller, the different is statistically significant.
 
 # Problem 2 - Food Expenditure Data
+
+## Problem 2(a)
+
+```{r}
+df <- read.csv("datasets/food_expenditure.csv")
+```
