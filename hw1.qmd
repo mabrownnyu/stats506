@@ -89,3 +89,22 @@ print(100*numerator/denominator)
 ```
 
 The percentage of abalones for which the viscera weight was greater than the shell weight was 6.51%.
+
+## Problem 1(d)
+
+```{r}
+
+
+male_correlations <- cor(males[,c("whole_weight", "shucked_weight",
+                                  "viscera_weight", "shell_weight")], males$rings)
+female_correlations <- cor(females[,c("whole_weight", "shucked_weight", 
+                                      "viscera_weight", "shell_weight")], females$rings)
+infant_correlations <- cor(infants[,c("whole_weight", "shucked_weight", 
+                                      "viscera_weight", "shell_weight")], infants$rings)
+
+correlations <- data.frame(cbind(male_correlations, female_correlations,
+                                 infant_correlations))
+names(correlations) <- c("M (rings)", "F (rings)", "I (rings)")
+
+correlations
+```

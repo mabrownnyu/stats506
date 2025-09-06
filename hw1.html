@@ -210,6 +210,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The percentage of abalones for which the viscera weight was greater than the shell weight was 6.51%.</p>
 </section>
 </section>
+<section id="problem-1d" class="level2">
+<h2 class="anchored" data-anchor-id="problem-1d">Problem 1(d)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>male_correlations <span class="ot">&lt;-</span> <span class="fu">cor</span>(males[,<span class="fu">c</span>(<span class="st">"whole_weight"</span>, <span class="st">"shucked_weight"</span>,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"viscera_weight"</span>, <span class="st">"shell_weight"</span>)], males<span class="sc">$</span>rings)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>female_correlations <span class="ot">&lt;-</span> <span class="fu">cor</span>(females[,<span class="fu">c</span>(<span class="st">"whole_weight"</span>, <span class="st">"shucked_weight"</span>, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"viscera_weight"</span>, <span class="st">"shell_weight"</span>)], females<span class="sc">$</span>rings)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>infant_correlations <span class="ot">&lt;-</span> <span class="fu">cor</span>(infants[,<span class="fu">c</span>(<span class="st">"whole_weight"</span>, <span class="st">"shucked_weight"</span>, </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"viscera_weight"</span>, <span class="st">"shell_weight"</span>)], infants<span class="sc">$</span>rings)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(male_correlations, female_correlations,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>                                 infant_correlations))</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(correlations) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"M (rings)"</span>, <span class="st">"F (rings)"</span>, <span class="st">"I (rings)"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>correlations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               M (rings)  F (rings) I (rings)
+whole_weight   0.3721966 0.26675851 0.6963268
+shucked_weight 0.2223938 0.09484802 0.6202458
+viscera_weight 0.3209535 0.21161537 0.6732727
+shell_weight   0.5109967 0.40590702 0.7254357</code></pre>
+</div>
+</div>
+</section>
 </section>
 
 </main>
