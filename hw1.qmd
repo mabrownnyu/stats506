@@ -158,3 +158,16 @@ df <- df[df$currency == "USD", ]
 print(paste0("Number of observations (only USD): ", nrow(df)))
 
 ```
+
+## Problem 2(d)
+
+```{r}
+summary(df$age)
+```
+
+```{r}
+df <- df[df$age < 99 & df$age > 17, ]
+df <- df[!is.na(df$age), ]
+```
+
+I removed all minors under the age of 18 and anyone older than 99.
