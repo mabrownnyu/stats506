@@ -335,7 +335,24 @@ mean of x mean of y
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">99</span> <span class="sc">&amp;</span> df<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">17</span>, ]</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>age), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>I removed all minors under the age of 18 and anyone older than 99.</p>
+<p>I removed all minors under the age of 18 and anyone older than 99. I also removed records where the age is not reported.</p>
+</section>
+<section id="problem-2e" class="level2">
+<h2 class="anchored" data-anchor-id="problem-2e">Problem 2(e)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Length     Class      Mode 
+      196 character character </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span><span class="fu">is.na</span>(df<span class="sc">$</span>state) <span class="sc">&amp;</span> df<span class="sc">$</span>state <span class="sc">!=</span> <span class="st">"XX"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I removed all records where state is not reported or where the state is “XX”.</p>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
 </section>
 </section>
 
