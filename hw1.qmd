@@ -166,7 +166,13 @@ summary(df$age)
 ```
 
 ```{r}
-df <- df[df$age < 99 & df$age > 17, ]
+# filter out age >= 99
+df <- df[df$age <= 99, ]
+
+# filter out age < 18
+df <- df[df$age >= 18, ]
+
+# filter out where age is NA
 df <- df[!is.na(df$age), ]
 ```
 
@@ -179,10 +185,10 @@ summary(df$state)
 ```
 
 ```{r}
-df <- df[!is.na(df$state) & df$state != "XX", ]
+df <- df[!is.na(df$state) & df$state != "XX" & df$state != "", ]
 ```
 
-I removed all records where state is not reported or where the state is "XX".
+I removed all records where state is not reported, where the state is "XX", or where state is an empty string.
 
 ## Problem 2(f)
 
@@ -195,14 +201,23 @@ df$dining_spending <- as.numeric(df$dining_spending)
 df$misc_spending <- as.numeric(df$misc_spending)
 
 # filter out NAs
-df <- df[!is.na(df$food_spending) & !is.na(df$grocery_spending)
-         & !is.na(df$dining_spending & !is.na(df$misc_spending)), ]
+df <- df[!is.na(df$food_spending), ]
+df <- df[!is.na(df$grocery_spending), ]
+df <- df[!is.na(df$dining_spending), ]
+df <- df[!is.na(df$misc_spending), ]
 
+         
 # filter out food expenditures less than 0
-df <- df[df$food_spending >= 0
-         & df$grocery_spending >= 0
-         & df$dining_spending >= 0
-         & df$misc_spending >= 0, ]
+df <- df[(df$food_spending >= 0)
+         & (df$grocery_spending >= 0)
+         & (df$dining_spending >= 0)
+         & (df$misc_spending >= 0), ]
 ```
 
 I first converted food spending to numeric values. Then, I filtered out records where a type of food spending was not reported. Lastly, I filtered out records where the level of food spending was a negative amount.
+
+## Problem 2(g)
+
+```{r}
+summary(df$n_dineout)
+```
