@@ -138,3 +138,12 @@ Each group has a statistically significant difference in the number of rings amo
 ```{r}
 df <- read.csv("datasets/food_expenditure.csv")
 ```
+
+## Problem 2(b)
+
+```{r}
+names(df) <- c("id", "age", "n_household", "state", "currency", 
+               "food_spending", "grocery_spending", "dining_spending",
+               "misc_spending", "n_dineout", "alcohol", "food_assistance"
+               )
+```
