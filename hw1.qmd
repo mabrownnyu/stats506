@@ -7,6 +7,8 @@ editor: visual
 author: "Megan Brown"
 ---
 
+Github repo: <https://github.com/mabrownnyu/stats506>
+
 # Problem 1 - Abalone Data
 
 ## Problem 1(a)
