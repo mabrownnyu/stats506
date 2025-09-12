@@ -1,6 +1,8 @@
 ---
 title: "Homework 1"
-format: html
+format: 
+  html:
+    embed-resources: true
 editor: visual
 author: "Megan Brown"
 ---
