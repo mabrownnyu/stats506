@@ -1,0 +1,96 @@
+---
+title: "Homework 2"
+format: 
+  html:
+    embed-resources: true
+editor: visual
+author: "Megan Brown"
+---
+
+Github repo: <https://github.com/mabrownnyu/stats506>
+
+```{r}
+library(microbenchmark)
+```
+
+# Problem 1
+
+```{r}
+set.seed(42)
+```
+
+## Problem 1(a)
+
+### Version 1
+
+```{r}
+
+forLoopWalk <- function(num){
+  position = 0
+  for (step in 1:num){
+    outcomes <- c(1, -1)
+    choice <- sample(outcomes, 1, prob = c(0.5, 0.5))
+    
+    if(choice == 1){
+      outcomes <- c(1, 10)
+      choice <- sample(outcomes, 1, prob = c(.95, 0.05))
+    }
+    else{
+      outcomes <- c(-1, -3)
+      choice <- sample(outcomes, 1, prob = c(0.8, 0.2))
+    }
+    
+    position <- position + choice
+    
+  }
+  return(position)
+}
+```
+
+### Version 2
+
+```{r}
+vectorWalk <- function(num){
+  positions <- sample(c(1, -1, 10, -3), size=num, prob=c(0.475, 0.4, 0.025, 0.1), replace=TRUE)
+  position <- sum(positions)
+  return(position)
+}
+```
+
+### Version 3
+
+```{r}
+
+applyWalk <- function(num){
+  positions <- 1:num
+  positions <- lapply(positions, FUN=function(x){
+    return(sample(x=c(1, -1, 10, -3), prob=c(0.475, 0.4, 0.025, 0.1)))
+  })
+  return(sum(unlist(positions)))
+} 
+```
+
+```{r}
+print(forLoopWalk(10))
+print(vectorWalk(10))
+print(applyWalk(10))
+print(forLoopWalk(1000))
+print(vectorWalk(1000))
+print(applyWalk(1000))
+```
+
+## Problem 1(c)
+
+```{r}
+microbenchmark(vw1k=vectorWalk(1000),
+               vw100k=vectorWalk(100000),
+               flw1k=forLoopWalk(1000),
+               flw100k=forLoopWalk(100000),
+               aw1k=applyWalk(1000),
+               aw100k=applyWalk(100000)
+               )
+```
+
+# Problem 2
+
+# Problem 3

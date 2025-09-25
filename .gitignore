@@ -1,3 +1,8 @@
+# local files
+.DS_Store
+*.Rproj
+datasets/*
+
 # History files
 .Rhistory
 .Rapp.history
