@@ -87,10 +87,32 @@ microbenchmark(vw1k=vectorWalk(1000),
                flw1k=forLoopWalk(1000),
                flw100k=forLoopWalk(100000),
                aw1k=applyWalk(1000),
-               aw100k=applyWalk(100000)
+               aw100k=applyWalk(100000),
+               unit="seconds"
                )
 ```
 
+The vector walk is the fastest, the apply walk is in the middle, and the for-loop walk is the slowest. This is because the for loop walk is interpreted at every step of the for loop. The apply function is also not vectorized.
+
 # Problem 2
+
+```{r}
+
+sampleDay <- function(n){
+  midnight_to_seven <- rpois(n*7, lambda=1)
+  nine_to_four <- rpois(n*8, lambda=8)
+  six_to_eleven <- rpois(n*6, lambda=12)
+  eight_and_five <- rnorm(n*2, mean=60, sd=sqrt(12))
+  
+  total_cars = sum(c(midnight_to_seven, nine_to_four, six_to_eleven, eight_and_five))
+  avg = total_cars/n
+  return(avg)
+}
+
+print(paste0("With 100 samples: ", sampleDay(100)))
+print(paste0("With 1k samples: ", sampleDay(100)))
+print(paste0("With 10k samples: ", sampleDay(100)))
+print(paste0("With 100k samples: ", sampleDay(100)))
+```
 
 # Problem 3
