@@ -1,6 +1,6 @@
 ---
 title: "Homework 2"
-format: 
+format:
   html:
     embed-resources: true
 editor: visual
@@ -16,6 +16,8 @@ library(microbenchmark)
 # Problem 1
 
 ```{r}
+
+# set random seed for reproducibility
 set.seed(42)
 ```
 
@@ -25,8 +27,19 @@ set.seed(42)
 
 ```{r}
 
+#' forLoopWalk (creates a random walk using a for loop)
+#'
+#' @param num An integer representing the number of steps we want to take
+#'            in the walk
+#'
+#' @returns The final position from the walk
 forLoopWalk <- function(num){
-  position = 0
+  
+  # start at position zero 
+  position <- 0
+  
+  # for each step, sample 1 or -1
+  # then based on 1 or -1, choose 1, -1, -3, or 10
   for (step in 1:num){
     outcomes <- c(1, -1)
     choice <- sample(outcomes, 1, prob = c(0.5, 0.5))
@@ -40,9 +53,12 @@ forLoopWalk <- function(num){
       choice <- sample(outcomes, 1, prob = c(0.8, 0.2))
     }
     
+    # add the step choice to the position
     position <- position + choice
     
   }
+  
+  # return the final position 
   return(position)
 }
 ```
@@ -50,8 +66,18 @@ forLoopWalk <- function(num){
 ### Version 2
 
 ```{r}
+#' vectorWalk (creates a random walk using R's built-in vectorization)
+#'
+#' @param num An integer representing the number of steps we want to take
+#'            in the walk
+#'
+#' @returns The final position from the walk
 vectorWalk <- function(num){
+  
+  # get a sample of every step with the according probabilities 
   positions <- sample(c(1, -1, 10, -3), size=num, prob=c(0.475, 0.4, 0.025, 0.1), replace=TRUE)
+  
+  # sum over steps to get the final positions
   position <- sum(positions)
   return(position)
 }
@@ -60,20 +86,35 @@ vectorWalk <- function(num){
 ### Version 3
 
 ```{r}
-
+#' applyWalk (creates a random walk using R's apply function)
+#'
+#' @param num An integer representing the number of steps we want to take
+#'            in the walk
+#'
+#' @returns The final position from the walk
 applyWalk <- function(num){
+  # set array
   positions <- 1:num
+  
+  # for each position, return a step based on the probabilties 
   positions <- lapply(positions, FUN=function(x){
     return(sample(x=c(1, -1, 10, -3), prob=c(0.475, 0.4, 0.025, 0.1)))
   })
+  
+  # add steps to find final position
   return(sum(unlist(positions)))
 } 
 ```
 
+### Verification that this worked
+
 ```{r}
+# for ten samples
 print(forLoopWalk(10))
 print(vectorWalk(10))
 print(applyWalk(10))
+
+# for 1k samples
 print(forLoopWalk(1000))
 print(vectorWalk(1000))
 print(applyWalk(1000))
@@ -97,22 +138,102 @@ The vector walk is the fastest, the apply walk is in the middle, and the for-loo
 # Problem 2
 
 ```{r}
-
+#' sampleDay (for n days, sample the number of cars based on the distribution per hour)
+#'
+#' @param n An integer representing the number of days we want to sample
+#'
+#' @returns The average number of cars per day
 sampleDay <- function(n){
-  midnight_to_seven <- rpois(n*7, lambda=1)
+  # eight hours between midnight and seven
+  midnight_to_seven <- rpois(n*8, lambda=1)
+  # eight hours between nine and four
   nine_to_four <- rpois(n*8, lambda=8)
+  # eight hours between six and eleven
   six_to_eleven <- rpois(n*6, lambda=12)
+  # two hours for eight and five
   eight_and_five <- rnorm(n*2, mean=60, sd=sqrt(12))
   
-  total_cars = sum(c(midnight_to_seven, nine_to_four, six_to_eleven, eight_and_five))
-  avg = total_cars/n
+  # sum total number of cars for every day
+  total_cars <- sum(c(midnight_to_seven, nine_to_four, six_to_eleven, eight_and_five))
+  
+  # divide by number of days for average
+  avg <- total_cars/n
   return(avg)
 }
 
 print(paste0("With 100 samples: ", sampleDay(100)))
-print(paste0("With 1k samples: ", sampleDay(100)))
-print(paste0("With 10k samples: ", sampleDay(100)))
-print(paste0("With 100k samples: ", sampleDay(100)))
+print(paste0("With 1k samples: ", sampleDay(1000)))
+print(paste0("With 10k samples: ", sampleDay(10000)))
+print(paste0("With 100k samples: ", sampleDay(100000)))
 ```
 
+The average number of cars that passes through the intersection every day is 263.
+
 # Problem 3
+
+```{r}
+youtube <- read.csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-03-02/youtube.csv')
+```
+
+## Problem 3(a)
+
+```{r}
+# filter to columns without identifying information 
+youtube <- youtube[,c("year", "funny", "show_product_quickly",
+                      "patriotic", "celebrity", "danger", "animals",
+                      "use_sex", "kind", "view_count", "like_count",
+                      "dislike_count", "favorite_count", "comment_count",
+                      "published_at", "category_id")]
+
+dim(youtube)
+```
+
+The resulting dimensions are 247 rows and 16 columns.
+
+## Problem 3(b)
+
+```{r}
+# likes
+hist(youtube$like_count)
+hist(log(youtube$like_count + 1), breaks=20)
+```
+
+```{r}
+# dislikes
+hist(youtube$dislike_count)
+hist(log(youtube$dislike_count + 1), breaks=20)
+```
+
+```{r}
+# views
+hist(youtube$view_count)
+hist(log(youtube$view_count + 1), breaks=20)
+```
+
+```{r}
+# favorites
+hist(youtube$favorite_count)
+hist(log(youtube$favorite_count + 1), breaks=20)
+```
+
+`favorite_count` is not suitable because there is not variation in the values.
+
+```{r}
+# comments
+hist(youtube$comment_count)
+hist(log(youtube$comment_count + 1), breaks=20)
+```
+
+`like_count` and `view_count` are definitely suitable for outcomes since they are both (approximately) normally distributed after a log transformation. `dislike_count` and `comment_count` could also be used, but they are still a bit left-skewed after a log transformation. `favorite_count` is completely unsuitable for regression since there is no variation in the outcome variable.
+
+```{r}
+# do transformations discussed above
+youtube$view_count <- log(youtube$view_count + 1)
+youtube$like_count <- log(youtube$like_count + 1)
+youtube$dislike_count <- log(youtube$dislike_count + 1)
+youtube$comment_count <- log(youtube$comment_count + 1)
+```
+
+GPT disclosure: I used GPT to try and bug fix why my Quarto -\> HTML output was failing (I learned first that I had an extra whitespace in the yaml that was causing it to fail. Then, I learned that I was not being patient enough with `microbenchmark` for the time benchmarking step in 1(c)!)
+
+## Problem 3(c)
