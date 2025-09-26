@@ -147,18 +147,18 @@ microbenchmark(vw1k=vectorWalk(1000),
                )
 ```
 
-The vector walk is the fastest, the apply walk is in the middle, and the for-loop walk is the slowest. This is because the for loop walk is interpreted at every step of the for loop. The apply function is also not vectorized.
+The vector walk is the fastest, and the for-loop and apply functions are slower. This is because the for loop walk is interpreted at every step of the for loop. The apply function is also not vectorized.
 
 ## Problem 1(d)
 
 ```{r}
 n <- 10000
 tests10 <- 1:n
-tests10 <- sapply(tests, FUN=vectorWalk, num=10)
+tests10 <- sapply(tests10, FUN=vectorWalk, num=10)
 100 * sum(tests10==0) / length(tests10)
 
 tests100 <- 1:n
-tests100 <- sapply(tests, FUN=vectorWalk, num=100)
+tests100 <- sapply(tests100, FUN=vectorWalk, num=100)
 100 * sum(tests100==0) / length(tests100)
 
 tests1k <- 1:n
@@ -167,7 +167,7 @@ tests1k <- sapply(tests1k, FUN=vectorWalk, num=1000)
 
 ```
 
-When the number of steps is 10, the probability of the final step of the walk being 0 is 15.9%. When the number of steps is 100, the probability of the final step of the walk being 0 is 0.004%. When the number of steps is 1000, the probability of the final step of the walk being being 0 is 1.34%. I estimated these values by conducting 10k of the random walks and then calculating the number of times the final step was 0.
+When the number of steps is 10, the probability of the final step of the walk being 0 is 13.3%. When the number of steps is 100, the probability of the final step of the walk being 0 is 2.1%. When the number of steps is 1000, the probability of the final step of the walk being being 0 is 0.6%. I estimated these values by conducting 10k of the random walks and then calculating the number of times the final step was 0.
 
 # Problem 2
 
@@ -201,7 +201,7 @@ print(paste0("With 10k samples: ", sampleDay(10000)))
 print(paste0("With 100k samples: ", sampleDay(100000)))
 ```
 
-The average number of cars that passes through the intersection every day is 263.
+The average number of cars that passes through the intersection every day is 264.
 
 # Problem 3
 
@@ -338,8 +338,8 @@ for (col in c("funny", "show_product_quickly", "patriotic",
 
 X <- as.matrix(cbind(1, X))
 
-# I used slides from STATS 500 Fall 2024 to verify that this code 
-# was correct. 
+# I used slides from STATS 500 Fall 2024 to verify that this formula 
+# and code was correct. 
 xtx <- t(X) %*% X
 xtxi <- solve(xtx)
 beta_hat <- xtxi %*% t(X) %*% youtube[,"view_count"]
@@ -352,4 +352,4 @@ print(views$coefficients)
 
 The coefficients are the same from the matrix multiplication and the `lm` function.
 
-GPT disclosure: I used GPT to try and bug fix why my Quarto -\> HTML output was failing (I learned first that I had an extra whitespace in the yaml that was causing it to fail. Then, I learned that I was not being patient enough with `microbenchmark` for the time benchmarking step in 1(c)!)
+GPT disclosure: I used GPT to try and bug fix why my Quarto -\> HTML output was failing. I learned first that I had an extra whitespace in the yaml that was causing it to fail. Then, I learned that it was compiling slowly during the `microbenchmark` function and not actually failing.
