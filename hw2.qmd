@@ -234,6 +234,50 @@ youtube$dislike_count <- log(youtube$dislike_count + 1)
 youtube$comment_count <- log(youtube$comment_count + 1)
 ```
 
-GPT disclosure: I used GPT to try and bug fix why my Quarto -\> HTML output was failing (I learned first that I had an extra whitespace in the yaml that was causing it to fail. Then, I learned that I was not being patient enough with `microbenchmark` for the time benchmarking step in 1(c)!)
-
 ## Problem 3(c)
+
+### Views
+
+```{r}
+views <- lm(view_count ~ funny + show_product_quickly + patriotic
+            + celebrity + danger + animals + use_sex + year, data=youtube
+            )
+summary(views)
+```
+
+### Likes
+
+```{r}
+likes <- lm(like_count ~ funny + show_product_quickly + patriotic
+            + celebrity + danger + animals + use_sex + year, data=youtube
+            )
+summary(likes)
+```
+
+### Dislike Count
+
+```{r}
+dislikes <- lm(dislike_count ~ funny + show_product_quickly + patriotic
+            + celebrity + danger + animals + use_sex + year, data=youtube
+            )
+summary(dislikes)
+```
+
+### Comment Count
+
+```{r}
+comments <- lm(comment_count ~ funny + show_product_quickly + patriotic
+            + celebrity + danger + animals + use_sex + year, data=youtube
+            )
+summary(comments)
+```
+
+For each of the regressions, there were few statistically significant results. For views, there was no statistically significant attribute. For dislikes, like counts, and comment counts, year was statistically significant at the 0.1 level and positive, meaning ads created later had an increased number of dislikes, likes, and comments. Ads that were patriotic got more dislikes and comments. Ads that included danger received more likes.
+
+## Problem 3(d)
+
+```{r}
+
+```
+
+GPT disclosure: I used GPT to try and bug fix why my Quarto -\> HTML output was failing (I learned first that I had an extra whitespace in the yaml that was causing it to fail. Then, I learned that I was not being patient enough with `microbenchmark` for the time benchmarking step in 1(c)!)
